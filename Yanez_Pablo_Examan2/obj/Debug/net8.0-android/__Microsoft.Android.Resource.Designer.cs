@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 using System;
 
-namespace Yanez_Pablo_Examan2 {
+namespace Yanez_Pablo_Examen2 {
 	#pragma warning disable IDE0002
 	public partial class Resource : _Microsoft.Android.Resource.Designer.ResourceConstant {
 	}

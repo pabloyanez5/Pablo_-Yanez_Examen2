@@ -9,8 +9,8 @@ namespace Yanez_Pablo_Examan2.Models
     public class RecargaModel
     {
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Numero { get; set; }
+        public string Nombre { get; set; } = string.Empty;
+        public string Numero { get; set; } = string.Empty;
         public DateTime Fecha { get; set; }
         public decimal Monto { get; set; }  
     }

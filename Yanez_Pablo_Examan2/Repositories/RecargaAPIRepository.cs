@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,13 @@ namespace Yanez_Pablo_Examan2.Repositories
 {
     public class RecargaAPIRepository : IRecargaRepository
     {
+        public HttpClient _httpClient;
+        public string _endpoint = "https://api.ejemplo.com/recargas";
+
+        public RecargaAPIRepository()
+        {
+            _httpClient = new HttpClient();
+        }
         public bool ActualizarRecarga(RecargaModel recarga)
         {
             throw new NotImplementedException();
@@ -32,7 +40,11 @@ namespace Yanez_Pablo_Examan2.Repositories
 
         public List<RecargaModel> ObtenerRecargas()
         {
-            throw new NotImplementedException();
+            var respuesta = _httpClient.GetAsync(_endpoint).Result;
+            var json = respuesta.Content.ReadAsStringAsync().Result;
+
+            var recargas = JsonConvert.DeserializeObject<List<RecargaModel>>(json);
+            return recargas ?? new List<RecargaModel>();
         }
     }
 }

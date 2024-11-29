@@ -11,9 +11,9 @@ namespace Yanez_Pablo_Examan2.Interfaces
     {
         List<RecargaModel> ObtenerRecargas();
         RecargaModel ObtenerRecargaPorId(int Id);
-        bool CrearRecarga(RecargaModel recarga);
-        bool ActualizarRecarga(RecargaModel recarga);
-        bool EliminarRecarga(int Id);
+        Boolean CrearRecarga(RecargaModel recarga);
+        Boolean ActualizarRecarga(RecargaModel recarga);
+        Boolean EliminarRecarga(int Id);
 
     }
 }

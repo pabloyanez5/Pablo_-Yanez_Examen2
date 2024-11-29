@@ -15,7 +15,24 @@ namespace Yanez_Pablo_Examan2.Repositories
         public string _fileName = Path.Combine(FileSystem.AppDataDirectory, "recargas.txt");
         public bool ActualizarRecarga(RecargaModel recarga)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var recargas = ObtenerRecargas();
+                var index = recargas.FindIndex(r => r.Id == recarga.Id);
+                
+                if (index != -1)
+                {
+                    recargas[index] = recarga;
+                    string recargasJson = JsonConvert.SerializeObject(recargas);
+                    File.WriteAllText(_fileName, recargasJson);
+                    return true;
+                }
+                return false;
+            }
+            catch 
+            {
+                return false;
+            }
         }
 
         public bool CrearRecarga(RecargaModel recarga)
@@ -38,17 +55,32 @@ namespace Yanez_Pablo_Examan2.Repositories
 
         public bool EliminarRecarga(int Id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var recargas = ObtenerRecargas();
+                recargas.RemoveAll(r => r.Id == Id);
+
+                string recargasJson = JsonConvert.SerializeObject(recargas);
+                File.WriteAllText(_fileName, recargasJson);
+                return true;
+            }
+            catch { return false; }
         }
 
         public RecargaModel ObtenerRecargaPorId(int Id)
         {
-            throw new NotImplementedException();
+            var recargas = ObtenerRecargas();
+            return recargas.Find(r => r.Id == Id);
         }
 
         public List<RecargaModel> ObtenerRecargas()
         {
-            throw new NotImplementedException();
+            if (File.Exists(_fileName))
+            {
+                string data = File.ReadAllText(_fileName);
+                return JsonConvert.DeserializeObject<List<RecargaModel>>(data) ?? new List<RecargaModel>();
+            }
+            return new List<RecargaModel>();
         }
     }
 }
